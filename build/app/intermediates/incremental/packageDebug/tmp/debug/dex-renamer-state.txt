@@ -1,0 +1,4 @@
+#Mon Apr 11 08:00:02 UZT 2022
+base.0=/home/kali/StudioProjects/Flutter-Rest-Api-Tutorials-With-Example/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

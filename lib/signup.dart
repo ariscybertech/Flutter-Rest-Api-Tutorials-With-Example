@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:apitutorials/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart';
@@ -12,17 +13,17 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
 
-  TextEditingController emailController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  void login(String email , password) async {
+  void login(String username , password) async {
     
     try{
       
       Response response = await post(
-        Uri.parse('https://reqres.in/api/login'),
+        Uri.parse('https://py.dwed.biz/v1.0/api/account/login/'),
         body: {
-          'email' : email,
+          'username' : username,
           'password' : password
         }
       );
@@ -32,6 +33,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         var data = jsonDecode(response.body.toString());
         print(data['token']);
         print('Login successfully');
+        Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreen()));
 
       }else {
         print('failed');
@@ -53,9 +55,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextFormField(
-              controller: emailController,
+              controller: usernameController,
               decoration: InputDecoration(
-                hintText: 'Email'
+                hintText: 'Username'
               ),
             ),
             SizedBox(height: 20,),
@@ -68,7 +70,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             SizedBox(height: 40,),
             GestureDetector(
               onTap: (){
-                login(emailController.text.toString(), passwordController.text.toString());
+                login(usernameController.text.toString(), passwordController.text.toString());
               },
               child: Container(
                 height: 50,
